@@ -2,9 +2,11 @@
   "name": "google-tts-api-test",
   "version": "1.0.0",
   "description": "A test of google-tts-api",
-  "main": "test.js",
+  "main": "index.js",
   "dependencies": {
-    "google-tts-api": "0.0.1"
+    "google-tts-api": "0.0.1",
+    "request":"*",
+    "express":"*"
   },
   "devDependencies": {},
   "scripts": {

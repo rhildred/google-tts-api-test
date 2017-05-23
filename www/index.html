@@ -1,0 +1,35 @@
+<script src="https://code.createjs.com/soundjs-0.6.2.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.3.15/angular.js"></script>
+<script>
+    angular.module("myApp", []).controller("myCtrl", function ($scope) {
+        function loadHandler(event) {
+            // This is fired for each sound that is registered.
+            var sId = $scope.model.filename + "___";
+            var instance = createjs.Sound.play(sId);  // play using id.  Could also use full sourcepath or event.src.
+            instance.volume = 0.5;
+            oRegistered[sId] = instance;
+        }
+        createjs.Sound.alternateExtensions = ["mp3"];
+        createjs.Sound.on("fileload", loadHandler, this);
+        var oRegistered = {};
+        $scope.playSound = function () {
+            var sId = $scope.model.filename + "___";
+            var oInstance = oRegistered[sId];
+            if(oInstance && oInstance.playState == "playFinished"){
+                oRegistered[sId] = createjs.Sound.play(sId);                
+            }else{
+                var sUrl = $scope.model.filename+"?q="+encodeURIComponent($scope.model.text);
+                createjs.Sound.registerSound(sUrl, sId);
+            }
+            
+        }
+    });
+
+</script>
+
+<body ng-app="myApp" ng-controller="myCtrl">
+    <h1>Sound hover</h1>
+    <input ng-model="model.filename" placeholder="Enter filename" />
+    <input ng-model="model.text" placeholder="Enter text" />
+    <button ng-click="playSound()" ng-mouseover="playSound()">Next</button>
+</body>
