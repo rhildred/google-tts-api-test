@@ -1,0 +1,2 @@
+# google-tts-api-test
+A test of google-tts-api. I needed to have a sound play when I pressed or moused over a speaker button. I used sound.js to actually play the sound in a browser independent way. I have a small index.js that serves my sample page. If it can't find the .mp3 containing the sound it also goes and gets an .mp3 file from Google Text to Speech. Text to speech was helpful to me for testing.
